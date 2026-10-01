@@ -6,21 +6,31 @@ package com.mycompany.reto0_din;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
  * @author Usuario
  */
-public class SecondaryController implements Initializable {
+public class UsuarioController implements Initializable {
+
 
     @FXML
-    private Button secondaryButton;
-
+    private Label UserWelcome;
+    @FXML
+    private Label labelNombre;
+    @FXML
+    private Label lblApellido;
+    @FXML
+    private Label lblFechaNac;
+    @FXML
+    private Label lblDNI;
+    @FXML
+    private Button btnLogOut;
     /**
      * Initializes the controller class.
      */
@@ -28,9 +38,5 @@ public class SecondaryController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void switchToPrimary(ActionEvent event) {
-    }
     
 }
