@@ -11,7 +11,7 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author beatl
+ * @author rebeca
  */
 public class VistaEmpleadoControlador implements Initializable {
 
