@@ -37,7 +37,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnLogOut" layoutX="194.0" layoutY="311.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="226.0" text="Cerrar Sesión">
+      <Button fx:id="btnLogOut" layoutX="194.0" layoutY="311.0" mnemonicParsing="false" onAction="#cerrarSesion" prefHeight="51.0" prefWidth="226.0" text="Cerrar Sesión">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

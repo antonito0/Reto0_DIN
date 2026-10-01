@@ -11,13 +11,14 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * FXML Controller class
  *
  * @author Usuario
  */
 public class UsuarioController implements Initializable {
-
 
     @FXML
     private Label UserWelcome;
@@ -39,12 +40,20 @@ public class UsuarioController implements Initializable {
     private Label intoDNI;
     @FXML
     private Label infoNombre;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    @FXML
+    public void cerrarSesion() {
+        Stage stage = (Stage) btnLogOut.getScene().getWindow();
+        // do what you have to do
+        stage.close();
+    }
+
 }
