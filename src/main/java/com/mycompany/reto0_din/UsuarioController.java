@@ -31,6 +31,14 @@ public class UsuarioController implements Initializable {
     private Label lblDNI;
     @FXML
     private Button btnLogOut;
+    @FXML
+    private Label infoApellido;
+    @FXML
+    private Label infoNacimiento;
+    @FXML
+    private Label intoDNI;
+    @FXML
+    private Label infoNombre;
     /**
      * Initializes the controller class.
      */

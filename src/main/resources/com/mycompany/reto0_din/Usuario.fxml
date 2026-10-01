@@ -22,7 +22,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblApellido" layoutX="60.0" layoutY="154.0" text="Apellido:  ">
+      <Label fx:id="lblApellido" layoutX="58.0" layoutY="153.0" text="Apellido:  ">
          <font>
             <Font size="24.0" />
          </font>
@@ -32,7 +32,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="lblDNI" layoutX="59.0" layoutY="238.0" text="DNI: ">
+      <Label fx:id="lblDNI" layoutX="59.0" layoutY="247.0" text="DNI: ">
          <font>
             <Font size="24.0" />
          </font>
@@ -42,5 +42,9 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
+      <Label fx:id="infoNombre" layoutX="453.0" layoutY="105.0" prefHeight="35.0" prefWidth="106.0" text="Label" />
+      <Label fx:id="infoApellido" layoutX="453.0" layoutY="153.0" prefHeight="35.0" prefWidth="106.0" text="Label" />
+      <Label fx:id="infoNacimiento" layoutX="453.0" layoutY="200.0" prefHeight="35.0" prefWidth="106.0" text="Label" />
+      <Label fx:id="intoDNI" layoutX="453.0" layoutY="247.0" prefHeight="35.0" prefWidth="106.0" text="Label" />
    </children>
 </Pane>
