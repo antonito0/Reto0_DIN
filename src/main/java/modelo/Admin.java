@@ -2,7 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Clases;
+package modelo;
+
+import java.io.Serializable;
 
 /**
  *
@@ -19,6 +21,14 @@ public class Admin extends Persona{
 
     public Admin() {
         this.baja = false;
+    }
+
+    public boolean isBaja() {
+        return baja;
+    }
+
+    public void setBaja(boolean baja) {
+        this.baja = baja;
     }
     
     
