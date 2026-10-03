@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -26,7 +25,9 @@ public class AdminController implements Initializable {
     @FXML private TextField usuario;
     @FXML private TextField contra;
     @FXML private TextField apellido;
-
+    @FXML
+    private Button salir;
+    
     @FXML private ComboBox<Empleado> empleados;
 
     @FXML private TextField usuarioE;
@@ -38,6 +39,14 @@ public class AdminController implements Initializable {
     @FXML private Label alerta;
 
     private final File fichero = new File("fichero.dat"); // ÚNICO FICHERO
+    @FXML
+    private Button modificarE;
+    @FXML
+    private Button registrarE;
+    @FXML
+    private Button modificar;
+    @FXML
+    private Button EmpleadoV;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -122,7 +131,7 @@ public class AdminController implements Initializable {
     }
 
     @FXML
-    private void actualizarEmpleado(ActionEvent event) {
+    private void modificarEmple(ActionEvent event) {
 
         Empleado seleccionado = empleados.getValue();
 
@@ -141,8 +150,7 @@ public class AdminController implements Initializable {
 
         mostrarInfo("Empleado actualizado correctamente.");
     }
-@FXML
-private void modificar(ActionEvent event) {
+private void modificarAdmin(ActionEvent event) {
 
     File fichO = new File("nombre.dat");
 
@@ -170,7 +178,7 @@ private void modificar(ActionEvent event) {
 }
 
     @FXML
-    private void registrarEmpleado(ActionEvent event) {
+    private void registrarEmlpe(ActionEvent event) {
 
         String ibanNuevo = ibanE.getText();
 
@@ -193,4 +201,20 @@ private void modificar(ActionEvent event) {
 
         limpiarCamposEmpleado();
     }
+    
+    @FXML
+    private void salir(ActionEvent event) {
+    // Obtener la ventana actual y cerrarla
+    salir.getScene().getWindow().hide();
+}
+
+   @FXML
+    private void abrirVistaEmpleado(ActionEvent event) {
+    try {
+        App.setRoot("VistaEmpleado");   // nombre del FXML SIN .fxml
+    } catch (Exception e) {
+        System.out.println("No se pudo abrir VistaEmpleado");
+    }
+}
+
 }

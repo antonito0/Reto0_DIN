@@ -55,13 +55,41 @@ public class ImplementacionFichero {
         return null;
     }
 
-    public void actualizarAdmin(File fichO, Admin adminActualizado) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
-            oos.writeObject(adminActualizado);
-        } catch (Exception e) {
-            System.out.println("Error actualizando admin");
+   public void actualizarAdmin(File fichO, Admin adminActualizado) {
+    List<Object> lista = new ArrayList<>();
+    boolean fin = false;
+    // 1. Leer TODOS los objetos del fichero
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
+
+        while (!fin) {
+            try {
+                Object obj = ois.readObject();
+                lista.add(obj);
+            } catch (EOFException e) {
+                fin = true;
+            }
+        }
+    } catch (Exception e) {
+        System.out.println("Error leyendo fichero para actualizar admin");
+    }
+
+    // 2. Reemplazar el único admin
+    for (int i = 0; i < lista.size(); i++) {
+        if (lista.get(i) instanceof Admin) {
+            lista.set(i, adminActualizado);
+            break; // solo hay uno
         }
     }
+    // 3. Reescribir el fichero completo
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
+        for (Object obj : lista) {
+            oos.writeObject(obj);
+        }
+    } catch (Exception e) {
+        System.out.println("Error escribiendo fichero al actualizar admin");
+    }
+}
+
     public List<Empleado> leerEmpleados(File fichO) {
         List<Empleado> lista = new ArrayList<>();
         boolean fin = false;
@@ -84,53 +112,49 @@ public class ImplementacionFichero {
         return lista;
     }
 
-    // Actualizar un empleado concreto (por usuario)
     public void actualizarEmpleado(File fichO, Empleado empActualizado) {
+    List<Object> lista = new ArrayList<>();
+    boolean fin = false;
+    // 1. Leer todo el fichero
+    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
+        while (!fin) {
+            try {
+                lista.add(ois.readObject());
+            } catch (EOFException e) {
+                fin = true;
+            }
+        }
+    } catch (Exception e) {
+        System.out.println("Error leyendo fichero para actualizar empleado");
+    }
+    // 2. Reemplazar el empleado correcto
+    for (int i = 0; i < lista.size(); i++) {
+        Object obj = lista.get(i);
 
-        List<Empleado> lista = leerEmpleados(fichO);
+        if (obj instanceof Empleado) {
+            Empleado emp = (Empleado) obj;
 
-        for (int i = 0; i < lista.size(); i++) {
-            if (lista.get(i).getUsuario().equals(empActualizado.getUsuario())) {
+            // Puedes comparar por usuario o por IBAN
+            if (emp.getUsuario().equals(empActualizado.getUsuario())) {
                 lista.set(i, empActualizado);
             }
         }
-
-        // Reescribir SOLO empleados (si quieres mantener admins/usuarios, habría que leer todo y filtrar)
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
-            // Aquí solo escribo empleados; si quieres mantener admins y usuarios, hay que ampliar esto
-            for (Empleado e : lista) {
-                oos.writeObject(e);
-            }
-        } catch (Exception e) {
-            System.out.println("Error actualizando empleado");
-        }
     }
-    public void actualizarAdmin(File fichO, Admin adminActualizado) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
-            oos.writeObject(adminActualizado);
-        } catch (Exception e) {
-            System.out.println("Error actualizando admin");
+    // 3. Reescribir todo el fichero
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
+        for (Object obj : lista) {
+            oos.writeObject(obj);
         }
+    } catch (Exception e) {
+        System.out.println("Error escribiendo fichero al actualizar empleado");
+    }
     }
     
     public void insertarEmpleado(File fichO, Empleado emp) {
-
-    // Si el fichero ya existe, hacemos APPEND sin cabecera
-    if (fichO.exists()) {
-        try (MyObjectOutputStream moos = new MyObjectOutputStream(new FileOutputStream(fichO, true))) {
-            moos.writeObject(emp);
-        } catch (Exception e) {
-            System.out.println("Error insertando empleado");
-        }
-
-    // Si el fichero NO existe, lo creamos con cabecera normal
-    } else {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
-            oos.writeObject(emp);
-        } catch (Exception e) {
-            System.out.println("Error creando fichero y escribiendo empleado");
-        }
+    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO, true))) {
+        oos.writeObject(emp);
+    } catch (Exception e) {
+        System.out.println("Error insertando empleado");
     }
-}
-
+    }
 }
