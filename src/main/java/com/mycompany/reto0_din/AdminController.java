@@ -50,17 +50,13 @@ public class AdminController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        // === CARGAR ADMIN ===
+        
         Admin admin = modelo.verAdmin(fichero);
         if (admin != null) {
             rellenarLabels(admin);
         }
-
-        // === CARGAR EMPLEADOS ===
         empleados.getItems().clear();
-        empleados.getItems().add(null); // opción vacía
-
+        empleados.getItems().add(null);
         for (Empleado e : modelo.leerEmpleados(fichero)) {
             empleados.getItems().add(e);
         }
@@ -74,11 +70,8 @@ public class AdminController implements Initializable {
         apellido.setText(admin.getApellido());
         baja.setSelected(admin.isBaja());
     }
-
-    // ============================
-    //   MENSAJES EN LABEL
-    // ============================
-
+    
+    //mensaje para admin para informar 
     private void mostrarInfo(String msg) {
         alerta.setStyle("-fx-text-fill: green;");
         alerta.setText(msg);
@@ -89,26 +82,18 @@ public class AdminController implements Initializable {
         alerta.setText(msg);
     }
 
-    // ============================
-    //   EMPLEADOS
-    // ============================
-
     private void seleccionarEmpleado() {
-
         Empleado emp = empleados.getValue();
-
         if (emp == null) {
             limpiarCamposEmpleado();
             mostrarInfo("Introduce un nuevo empleado.");
             return;
         }
-
         usuarioE.setText(emp.getUsuario());
         contraE.setText(emp.getContrasena());
         nombreE.setText(emp.getNombre());
         apeE.setText(emp.getApellido());
         ibanE.setText(emp.getIban());
-
         mostrarInfo("Empleado cargado.");
     }
 
@@ -119,7 +104,6 @@ public class AdminController implements Initializable {
         apeE.clear();
         ibanE.clear();
     }
-
     private boolean ibanRepetido(String iban) {
 
         for (Empleado e : modelo.leerEmpleados(fichero)) {
@@ -139,7 +123,6 @@ public class AdminController implements Initializable {
             mostrarError("Debes seleccionar un empleado para actualizar.");
             return;
         }
-
         seleccionado.setUsuario(usuarioE.getText());
         seleccionado.setContrasena(contraE.getText());
         seleccionado.setNombre(nombreE.getText());
@@ -147,31 +130,27 @@ public class AdminController implements Initializable {
         seleccionado.setIban(ibanE.getText());
 
         modelo.actualizarEmpleado(fichero, seleccionado);
-
         mostrarInfo("Empleado actualizado correctamente.");
     }
-private void modificarAdmin(ActionEvent event) {
+    private void modificarAdmin(ActionEvent event) {
 
     File fichO = new File("nombre.dat");
 
-    // Crear el Admin actualizado con los datos de los TextField
     Admin adminNuevo = new Admin(
-            usuario.getText(),      // usuario
-            contra.getText(),       // contraseña
-            nombreAdmin.getText(),  // nombre
-            apellido.getText()      // apellido
+            usuario.getText(),     
+            contra.getText(),       
+            nombreAdmin.getText(),  
+            apellido.getText()      
     );
 
-    // Bloquear el campo usuario para que no se cambie
+    // usuario no se puede cambiar
     usuario.setEditable(false);
 
     // Actualizar el boolean del CheckBox
     adminNuevo.setBaja(baja.isSelected());
 
-    // Guardarlo en el fichero
     modelo.actualizarAdmin(fichO, adminNuevo);
 
-    // Volver a rellenar los labels con los datos nuevos
     rellenarLabels(adminNuevo);
 
     System.out.println("Admin actualizado correctamente.");
@@ -186,7 +165,6 @@ private void modificarAdmin(ActionEvent event) {
             mostrarError("El IBAN ya existe. No se puede registrar este empleado.");
             return;
         }
-
         Empleado nuevo = new Empleado(
                 ibanE.getText(),
                 usuarioE.getText(),
@@ -194,7 +172,6 @@ private void modificarAdmin(ActionEvent event) {
                 nombreE.getText(),
                 apeE.getText()
         );
-
         modelo.insertarEmpleado(fichero, nuevo);
 
         mostrarInfo("Empleado registrado correctamente.");
@@ -207,7 +184,6 @@ private void modificarAdmin(ActionEvent event) {
     // Obtener la ventana actual y cerrarla
     salir.getScene().getWindow().hide();
 }
-
    @FXML
     private void abrirVistaEmpleado(ActionEvent event) {
     try {
