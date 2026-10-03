@@ -10,9 +10,17 @@
    <children>
       <Label layoutX="247.0" layoutY="57.0" text="Nombre de usuario:" />
       <Label layoutX="270.0" layoutY="171.0" text="Contraseña" />
+      <Label layoutX="270.0" layoutY="151.0" text="Contraseña" />
       <TextField fx:id="textFieldUsuario" layoutX="226.0" layoutY="95.0" />
+<<<<<<< HEAD
       <PasswordField fx:id="passwordFieldContrasena" layoutX="226.0" layoutY="211.0" />
       <Button fx:id="buttonIniciarSesion" layoutX="205.0" layoutY="292.0" mnemonicParsing="false" onAction="#switchToUsuario" text="Iniciar sesión" />
       <Button fx:id="buttonCrearUsuario" layoutX="309.0" layoutY="292.0" mnemonicParsing="false" text="Crear usuario" />
+=======
+      <PasswordField fx:id="passwordFieldContrasena" layoutX="225.0" layoutY="188.0" />
+      <Button fx:id="buttonIniciarSesion" layoutX="205.0" layoutY="292.0" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar sesión" />
+      <Button fx:id="buttonCrearUsuario" layoutX="309.0" layoutY="292.0" mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario" />
+      <Label fx:id="lblError" layoutX="210.0" layoutY="239.0" prefHeight="17.0" prefWidth="179.0" textFill="RED" />
+>>>>>>> 7fb3ac96cbb93742ff21f5e3c92d91499602a93b
    </children>
 </Pane>
