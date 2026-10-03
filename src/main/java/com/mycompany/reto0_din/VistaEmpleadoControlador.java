@@ -11,24 +11,31 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import modelo.ImplementacionF;
+import modelo.Usuario;
 
 /**
  * FXML Controller class
  *
  * @author rebeca
  */
-public class VistaEmpleadoControlador{
+public class VistaEmpleadoControlador {
 
     @FXML
     private Button salir;
     @FXML
-    private ListView<?> listaUs;
+    private ListView<String> listaUs;
     @FXML
     private Button visualizar;
 
     @FXML
-    public void visualizarUsuarios(ActionEvent event){
-           System.out.println("com.mycompany.reto0_din.VistaEmpleadoControlador.visualizarUsuarios()");
+    public void visualizarUsuarios(ActionEvent event) {
+        listaUs.getItems().clear();
+
+        ImplementacionF imp = new ImplementacionF();
+        for (Usuario u : imp.obtenerUsuarios()) {
+            listaUs.getItems().add(u.getNombre());
+        }
     }
-    
+
 }

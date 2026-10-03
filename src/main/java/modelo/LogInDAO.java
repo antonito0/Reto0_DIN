@@ -4,10 +4,13 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Unai.Ibarguren
  */
 public interface LogInDAO {
-    
+
+    ArrayList<Usuario> obtenerUsuarios();
 }
