@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -140,6 +141,33 @@ public class AdminController implements Initializable {
 
         mostrarInfo("Empleado actualizado correctamente.");
     }
+@FXML
+private void modificar(ActionEvent event) {
+
+    File fichO = new File("nombre.dat");
+
+    // Crear el Admin actualizado con los datos de los TextField
+    Admin adminNuevo = new Admin(
+            usuario.getText(),      // usuario
+            contra.getText(),       // contraseña
+            nombreAdmin.getText(),  // nombre
+            apellido.getText()      // apellido
+    );
+
+    // Bloquear el campo usuario para que no se cambie
+    usuario.setEditable(false);
+
+    // Actualizar el boolean del CheckBox
+    adminNuevo.setBaja(baja.isSelected());
+
+    // Guardarlo en el fichero
+    modelo.actualizarAdmin(fichO, adminNuevo);
+
+    // Volver a rellenar los labels con los datos nuevos
+    rellenarLabels(adminNuevo);
+
+    System.out.println("Admin actualizado correctamente.");
+}
 
     @FXML
     private void registrarEmpleado(ActionEvent event) {

@@ -2,29 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package modelo;
-
-import java.io.Serializable;
+package Clases;
 
 /**
  *
  * @author Unai.Ibarguren
  */
-public class Persona implements Serializable {
-    protected static final long serialVersionUID = 1L;
+public class Persona {
     
-    protected String usuario;
-    protected String contrasena;
-    protected String nombre;
-    protected String apellido;
+    private String usuario;
+    private String contrasena;
+    private String nombre;
+    private String apellido;
 
     public Persona(String usuario, String contrasena, String nombre, String apellido) {
         this.usuario = usuario;
-        this.contrasena = contrasena;
-        this.nombre = nombre;
-        this.apellido = apellido;
-    }
-    public Persona(String contrasena, String nombre, String apellido) {
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -60,9 +52,7 @@ public class Persona implements Serializable {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    public String getNombre(String nombre) {
-        return nombre;
-    }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -75,4 +65,7 @@ public class Persona implements Serializable {
     public String toString() {
         return "Persona{" + "usuario=" + usuario + ", contrasena=" + contrasena + ", nombre=" + nombre + ", apellido=" + apellido + '}';
     }
+    
+    
+    
 }

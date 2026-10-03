@@ -2,15 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package modelo;
-
-import java.util.ArrayList;
+package Clases;
 
 /**
  *
  * @author Unai.Ibarguren
  */
 public interface LogInDAO {
-
-    ArrayList<Usuario> obtenerUsuarios();
+    
 }

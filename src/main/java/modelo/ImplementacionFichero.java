@@ -105,6 +105,13 @@ public class ImplementacionFichero {
             System.out.println("Error actualizando empleado");
         }
     }
+    public void actualizarAdmin(File fichO, Admin adminActualizado) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
+            oos.writeObject(adminActualizado);
+        } catch (Exception e) {
+            System.out.println("Error actualizando admin");
+        }
+    }
     
     public void insertarEmpleado(File fichO, Empleado emp) {
 
