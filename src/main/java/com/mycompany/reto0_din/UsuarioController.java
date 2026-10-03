@@ -46,10 +46,7 @@ public class UsuarioController implements Initializable {
     @FXML
     private Label infoDNI;
 
-    public UsuarioController() {
-        this.p1 = new Usuario("12345678a",LocalDate.now()  ,"Galder.Lindosa","abcd*1234","Galder","Lindosa");
-    }
-    
+
 
     
     
