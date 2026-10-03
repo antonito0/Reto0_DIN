@@ -11,14 +11,19 @@ import java.io.Serializable;
  * @author Unai.Ibarguren
  */
 public class Persona implements Serializable {
-     private static final long serialVersionUID = 1L;
-    private String usuario;
-    private String contrasena;
-    private String nombre;
-    private String apellido;
+    private static final long serialVersionUID = 1L;
+    protected String usuario;
+    protected String contrasena;
+    protected String nombre;
+    protected  String apellido;
 
     public Persona(String usuario, String contrasena, String nombre, String apellido) {
         this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
+    public Persona(String contrasena, String nombre, String apellido) {
         this.contrasena = contrasena;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -67,7 +72,4 @@ public class Persona implements Serializable {
     public String toString() {
         return "Persona{" + "usuario=" + usuario + ", contrasena=" + contrasena + ", nombre=" + nombre + ", apellido=" + apellido + '}';
     }
-    
-    
-    
 }

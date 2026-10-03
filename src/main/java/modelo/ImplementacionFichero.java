@@ -64,5 +64,12 @@ public class ImplementacionFichero {
         }
         return admin;
     }
+    public void actualizarAdmin(File fichO, Admin adminActualizado) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
+            oos.writeObject(adminActualizado);
+        } catch (Exception e) {
+            System.out.println("Error actualizando admin");
+        }
+    }
     
 }
