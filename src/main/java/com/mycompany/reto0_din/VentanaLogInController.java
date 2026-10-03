@@ -6,6 +6,7 @@ package com.mycompany.reto0_din;
  */
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -37,5 +38,11 @@ public class VentanaLogInController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    @FXML
+        private void switchToUsuario() throws IOException {
+        App.setRoot("Usuario");
+    }
+
     
 }

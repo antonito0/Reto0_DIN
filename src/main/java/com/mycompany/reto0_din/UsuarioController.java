@@ -4,8 +4,9 @@
  */
 package com.mycompany.reto0_din;
 
-import Clases.Persona;
-import Clases.Usuario;
+import java.io.IOException;
+import modelo.Persona;
+import modelo.Usuario;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -46,32 +47,36 @@ public class UsuarioController implements Initializable {
     @FXML
     private Label infoDNI;
 
-
-
-    
-    
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        p1 = new Usuario("12345678A", LocalDate.now(), "Galder.Lindosa", "abcd*1234","Galder","Lindosa");
+        
         infoNombre.setText(p1.getNombre());
-        
+
         infoApellido.setText(p1.getApellido());
-        
+
         infoDNI.setText(p1.getDni());
-        
+
         infoNacimiento.setText(p1.getFechaNacimiento().toString());
-        
-        
+
+        UserWelcome.setText(p1.getUsuario());
+
     }
+    
+    
 
     @FXML
     public void cerrarSesion() {
         Stage stage = (Stage) btnLogOut.getScene().getWindow();
         stage.close();
     }
+
+    
+
 
 }
