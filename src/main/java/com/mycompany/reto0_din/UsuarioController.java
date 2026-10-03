@@ -2,9 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-package controlador;
+package com.mycompany.reto0_din;
 
+import Clases.Persona;
+import Clases.Usuario;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,10 +40,18 @@ public class UsuarioController implements Initializable {
     @FXML
     private Label infoNacimiento;
     @FXML
-    private Label intoDNI;
-    @FXML
     private Label infoNombre;
 
+    Usuario p1;
+    @FXML
+    private Label infoDNI;
+
+    public UsuarioController() {
+        this.p1 = new Usuario("12345678a",LocalDate.now()  ,"Galder.Lindosa","abcd*1234","Galder","Lindosa");
+    }
+    
+
+    
     
     
     /**
@@ -49,12 +60,20 @@ public class UsuarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        infoNombre.setText(p1.getNombre());
+        
+        infoApellido.setText(p1.getApellido());
+        
+        infoDNI.setText(p1.getDni());
+        
+        infoNacimiento.setText(p1.getFechaNacimiento().toString());
+        
+        
     }
 
     @FXML
     public void cerrarSesion() {
         Stage stage = (Stage) btnLogOut.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 
