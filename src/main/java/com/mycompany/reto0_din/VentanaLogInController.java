@@ -63,7 +63,8 @@ public class VentanaLogInController implements Initializable {
         Persona persona = modelo.obtenerPersona(fichero, textFieldUsuario.getText(), passwordFieldContrasena.getText());
         
        if (persona instanceof Usuario) {
-           
+                   App.setRoot("Usuario");
+                   
        } else if (persona instanceof Empleado) {
            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VistaEmpleado.fxml"));
             Parent root = fxmlLoader.load();
