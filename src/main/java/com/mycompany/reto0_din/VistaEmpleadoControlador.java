@@ -4,6 +4,7 @@
  */
 package com.mycompany.reto0_din;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,6 +21,8 @@ import modelo.Usuario;
  * @author rebeca
  */
 public class VistaEmpleadoControlador {
+    
+    private File fichero;
 
     @FXML
     private Button salir;
@@ -28,7 +31,7 @@ public class VistaEmpleadoControlador {
     @FXML
     private Button visualizar;
 
-    @FXML
+    /*@FXML
     public void visualizarUsuarios(ActionEvent event) {
         listaUs.getItems().clear();
 
@@ -36,6 +39,10 @@ public class VistaEmpleadoControlador {
         for (Usuario u : imp.obtenerUsuarios()) {
             listaUs.getItems().add(u.getNombre());
         }
+    }*/
+    
+    public void setDatos(File fichero) {
+        this.fichero = fichero;
     }
 
 }

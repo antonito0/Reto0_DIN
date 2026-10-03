@@ -19,6 +19,9 @@ import modelo.*;
 public class AdminController implements Initializable {
 
     private ImplementacionFichero modelo = new ImplementacionFichero();
+    
+    private Persona persona;
+    private File fichero;
 
     @FXML private Label nombreAdmin;
     @FXML private CheckBox baja;
@@ -38,7 +41,6 @@ public class AdminController implements Initializable {
 
     @FXML private Label alerta;
 
-    private final File fichero = new File("fichero.dat"); // ÚNICO FICHERO
     @FXML
     private Button modificarE;
     @FXML
@@ -51,10 +53,10 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        Admin admin = modelo.verAdmin(fichero);
+        /*/Admin admin = modelo.verAdmin(fichero);
         if (admin != null) {
             rellenarLabels(admin);
-        }
+        }*/
         empleados.getItems().clear();
         empleados.getItems().add(null);
         for (Empleado e : modelo.leerEmpleados(fichero)) {
@@ -63,13 +65,21 @@ public class AdminController implements Initializable {
 
         empleados.setOnAction(event -> seleccionarEmpleado());
     }
+    
+    public void setDatos(Persona persona, File fichero) {
+        this.persona = persona;
+        this.fichero = fichero;
+        usuario.setText(persona.getUsuario());
+        apellido.setText(persona.getApellido());
+        contra.setText(persona.getContrasena());
+    }
 
-    private void rellenarLabels(Admin admin) {
+   /*private void rellenarLabels(Admin admin) {
         usuario.setText(admin.getUsuario());
         nombreAdmin.setText(admin.getNombre());
         apellido.setText(admin.getApellido());
         baja.setSelected(admin.isBaja());
-    }
+    }*/
     
     //mensaje para admin para informar 
     private void mostrarInfo(String msg) {
@@ -134,27 +144,27 @@ public class AdminController implements Initializable {
     }
     private void modificarAdmin(ActionEvent event) {
 
-    File fichO = new File("nombre.dat");
+        File fichO = new File("nombre.dat");
 
-    Admin adminNuevo = new Admin(
-            usuario.getText(),     
-            contra.getText(),       
-            nombreAdmin.getText(),  
-            apellido.getText()      
-    );
+        Admin adminNuevo = new Admin(
+                usuario.getText(),     
+                contra.getText(),       
+                nombreAdmin.getText(),  
+                apellido.getText()      
+        );
 
-    // usuario no se puede cambiar
-    usuario.setEditable(false);
+        // usuario no se puede cambiar
+        usuario.setEditable(false);
 
-    // Actualizar el boolean del CheckBox
-    adminNuevo.setBaja(baja.isSelected());
+        // Actualizar el boolean del CheckBox
+        adminNuevo.setBaja(baja.isSelected());
 
-    modelo.actualizarAdmin(fichO, adminNuevo);
+        modelo.actualizarAdmin(fichO, adminNuevo);
 
-    rellenarLabels(adminNuevo);
+        //rellenarLabels(adminNuevo);
 
-    System.out.println("Admin actualizado correctamente.");
-}
+        System.out.println("Admin actualizado correctamente.");
+    }
 
     @FXML
     private void registrarEmlpe(ActionEvent event) {
@@ -181,16 +191,17 @@ public class AdminController implements Initializable {
     
     @FXML
     private void salir(ActionEvent event) {
-    // Obtener la ventana actual y cerrarla
-    salir.getScene().getWindow().hide();
-}
-   @FXML
-    private void abrirVistaEmpleado(ActionEvent event) {
-    try {
-        App.setRoot("VistaEmpleado");   // nombre del FXML SIN .fxml
-    } catch (Exception e) {
-        System.out.println("No se pudo abrir VistaEmpleado");
+        // Obtener la ventana actual y cerrarla
+        salir.getScene().getWindow().hide();
     }
-}
+    
+    @FXML
+    private void abrirVistaEmpleado(ActionEvent event) {
+        try {
+            App.setRoot("VistaEmpleado");   // nombre del FXML SIN .fxml
+        } catch (Exception e) {
+            System.out.println("No se pudo abrir VistaEmpleado");
+        }
+    }
 
 }
