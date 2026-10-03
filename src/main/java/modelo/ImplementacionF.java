@@ -1,14 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package modelo;
 
-/**
- *
- * @author Unai.Ibarguren
- */
-public class ImplementacionF implements LogInDAO{
-    
-    
+import java.util.ArrayList;
+
+public class ImplementacionF implements LogInDAO {
+
+    private ArrayList<Usuario> usuarios;
+
+    public ImplementacionF() {
+        usuarios = new ArrayList<>();
+    }
+
+    @Override
+    public ArrayList<Usuario> obtenerUsuarios() {
+        return usuarios;
+    }
 }
