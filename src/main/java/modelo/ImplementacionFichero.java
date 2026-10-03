@@ -6,10 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ImplementacionFichero {
-
-    // ============================
-    //   RELLENAR FICHERO (fillData)
-    // ============================
+    
+    //rellena el fichero 
     public static void fillData(File fichero) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichero))) {
             // ADMIN
@@ -57,10 +55,9 @@ public class ImplementacionFichero {
 
    public void actualizarAdmin(File fichO, Admin adminActualizado) {
     List<Object> lista = new ArrayList<>();
-    boolean fin = false;
-    // 1. Leer TODOS los objetos del fichero
+    boolean fin = false,encontrado=false;
+    
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
-
         while (!fin) {
             try {
                 Object obj = ois.readObject();
@@ -72,15 +69,12 @@ public class ImplementacionFichero {
     } catch (Exception e) {
         System.out.println("Error leyendo fichero para actualizar admin");
     }
-
-    // 2. Reemplazar el único admin
-    for (int i = 0; i < lista.size(); i++) {
-        if (lista.get(i) instanceof Admin) {
-            lista.set(i, adminActualizado);
-            break; // solo hay uno
-        }
+    for (int i = 0; i < lista.size() && !encontrado; i++) {
+    if (lista.get(i) instanceof Admin) {
+        lista.set(i, adminActualizado);
+        encontrado = true; 
     }
-    // 3. Reescribir el fichero completo
+}
     try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
         for (Object obj : lista) {
             oos.writeObject(obj);
@@ -115,7 +109,6 @@ public class ImplementacionFichero {
     public void actualizarEmpleado(File fichO, Empleado empActualizado) {
     List<Object> lista = new ArrayList<>();
     boolean fin = false;
-    // 1. Leer todo el fichero
     try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
         while (!fin) {
             try {
@@ -127,20 +120,17 @@ public class ImplementacionFichero {
     } catch (Exception e) {
         System.out.println("Error leyendo fichero para actualizar empleado");
     }
-    // 2. Reemplazar el empleado correcto
+   
     for (int i = 0; i < lista.size(); i++) {
         Object obj = lista.get(i);
 
         if (obj instanceof Empleado) {
             Empleado emp = (Empleado) obj;
-
-            // Puedes comparar por usuario o por IBAN
             if (emp.getUsuario().equals(empActualizado.getUsuario())) {
                 lista.set(i, empActualizado);
             }
         }
     }
-    // 3. Reescribir todo el fichero
     try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
         for (Object obj : lista) {
             oos.writeObject(obj);
@@ -149,7 +139,6 @@ public class ImplementacionFichero {
         System.out.println("Error escribiendo fichero al actualizar empleado");
     }
     }
-    
     public void insertarEmpleado(File fichO, Empleado emp) {
     try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO, true))) {
         oos.writeObject(emp);
