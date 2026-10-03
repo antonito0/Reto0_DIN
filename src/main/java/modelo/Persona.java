@@ -11,11 +11,12 @@ import java.io.Serializable;
  * @author Unai.Ibarguren
  */
 public class Persona implements Serializable {
-     private static final long serialVersionUID = 1L;
-    private String usuario;
-    private String contrasena;
-    private String nombre;
-    private String apellido;
+    protected static final long serialVersionUID = 1L;
+    
+    protected String usuario;
+    protected String contrasena;
+    protected String nombre;
+    protected String apellido;
 
     public Persona(String usuario, String contrasena, String nombre, String apellido) {
         this.usuario = usuario;
@@ -54,7 +55,9 @@ public class Persona implements Serializable {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-
+    public String getNombre(String nombre) {
+        return nombre;
+    }
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
