@@ -20,7 +20,8 @@
       <TextField fx:id="textFieldUsuario" layoutX="249.0" layoutY="178.0" prefHeight="25.0" prefWidth="174.0" />
       <TextField fx:id="textFieldContrasena" layoutX="249.0" layoutY="210.0" prefHeight="25.0" prefWidth="174.0" />
       <DatePicker fx:id="dateFechaNacimiento" layoutX="249.0" layoutY="146.0" />
-      <Button fx:id="buttonVolver" layoutX="207.0" layoutY="279.0" mnemonicParsing="false" onAction="#volver" text="Volver atras" />
-      <Button fx:id="buttonCrear" layoutX="310.0" layoutY="279.0" mnemonicParsing="false" text="Crear usuario" />
+      <Button fx:id="buttonVolver" layoutX="210.0" layoutY="292.0" mnemonicParsing="false" onAction="#volver" text="Volver atras" />
+      <Button fx:id="buttonCrear" layoutX="311.0" layoutY="292.0" mnemonicParsing="false" onAction="#crearUsuario" text="Crear usuario" />
+      <Label fx:id="labelError" layoutX="164.0" layoutY="252.0" textFill="RED" />
    </children>
 </Pane>

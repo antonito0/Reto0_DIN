@@ -60,7 +60,7 @@ public class VentanaLogInController implements Initializable {
     
     @FXML
     public void iniciarSesion (ActionEvent event) throws IOException {
-        Persona persona = modelo.obtenerPersona(fichero, textFieldUsuario.getText(), passwordFieldContrasena.getText());
+        Persona persona = modelo.iniciarSesion(fichero, textFieldUsuario.getText(), passwordFieldContrasena.getText());
         
        if (persona instanceof Usuario) {
            
@@ -101,6 +101,9 @@ public class VentanaLogInController implements Initializable {
     private void crearUsuario(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VentanaCrearUsuario.fxml"));
         Parent root = fxmlLoader.load();
+        
+        VentanaCrearUsuarioController controlador = fxmlLoader.getController();
+        controlador.setDatos(fichero);
 
         Stage stage = new Stage();
         stage.setTitle("Crear usuario");
