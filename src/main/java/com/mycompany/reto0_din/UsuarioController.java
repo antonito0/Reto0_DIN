@@ -55,6 +55,10 @@ public class UsuarioController implements Initializable {
      *
      * @param user
      */
+    
+    /* Al iniciar la ventana el metodo recoge el usuario enviado por VentanaLoginController
+    informacion en los labels correspondientes
+    */
     public void setDatos(Usuario user) {
         this.p1 = user;
 
@@ -75,6 +79,8 @@ public class UsuarioController implements Initializable {
 
     }
 
+    
+    // Boton que cierra el programa
     @FXML
     public void cerrarSesion() {
         Stage stage = (Stage) btnLogOut.getScene().getWindow();
