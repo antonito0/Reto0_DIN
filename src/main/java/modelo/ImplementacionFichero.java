@@ -4,12 +4,13 @@ import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import utilidades.MyObjectOutputStream;
 
 public class ImplementacionFichero {
     
     //rellena el fichero 
     public void fillData(File fichero) {
-        if (!fichero.exists()) {
+        if (!fichero.exists() || fichero.length() == 0) {
           try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichero))) {
                 // ADMIN
                  Admin admin1 = new Admin("admin1", "1234", "Mireia", "Lopez");
@@ -142,10 +143,10 @@ public class ImplementacionFichero {
         }
     }
     public void insertarEmpleado(File fichO, Empleado emp) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO, true))) {
-            oos.writeObject(emp);
+        try (MyObjectOutputStream moos = new MyObjectOutputStream(new FileOutputStream(fichO, true))) {
+            moos.writeObject(emp);
         } catch (Exception e) {
-            System.out.println("Error insertando empleado");
+            e.printStackTrace();
         }
     }
     
@@ -165,7 +166,7 @@ public class ImplementacionFichero {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error leyendo admin");
+            e.printStackTrace();
         }
         return null;
     }
@@ -185,16 +186,16 @@ public class ImplementacionFichero {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error leyendo admin");
+            e.printStackTrace();
         }
         return null;
     }
     
     public void insertarUsuario(File fichO, Usuario usu) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO, true))) {
-            oos.writeObject(usu);
+        try (MyObjectOutputStream moos = new MyObjectOutputStream(new FileOutputStream(fichO, true))) {
+            moos.writeObject(usu);
         } catch (Exception e) {
-            System.out.println("Error insertando empleado");
+            e.printStackTrace();
         }
     }
 }

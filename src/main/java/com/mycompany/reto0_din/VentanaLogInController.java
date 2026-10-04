@@ -35,7 +35,7 @@ public class VentanaLogInController implements Initializable {
 
     private ImplementacionFichero modelo = new ImplementacionFichero();
 
-    private final File fichero = new File("fichero.dat");
+    private File fichero = new File("fichero.dat");
 
     @FXML
     private TextField textFieldUsuario;
@@ -55,6 +55,10 @@ public class VentanaLogInController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         modelo.fillData(fichero);
     }
+    
+    public void setDatos(File fichero) {
+        this.fichero = fichero;
+    }
 
     @FXML
     public void iniciarSesion(ActionEvent event) throws IOException {
@@ -67,7 +71,6 @@ public class VentanaLogInController implements Initializable {
 
             UsuarioController controlador = fxmlLoader.getController();
             controlador.setDatos((Usuario) persona);
-
             
             Stage stage = new Stage();
             stage.setTitle("Usuario");
@@ -92,7 +95,7 @@ public class VentanaLogInController implements Initializable {
             Stage ventanaActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
             ventanaActual.close();
         } else if (persona instanceof Admin) {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Admin .fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Admin.fxml"));
             Parent root = fxmlLoader.load();
 
             AdminController controlador = fxmlLoader.getController();

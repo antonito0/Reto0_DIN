@@ -9,7 +9,6 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.reto0_din.VentanaLogInController">
    <children>
       <Label layoutX="247.0" layoutY="57.0" text="Nombre de usuario:" />
-      <Label layoutX="270.0" layoutY="171.0" text="Contraseña" />
       <Label layoutX="270.0" layoutY="151.0" text="Contraseña" />
       <TextField fx:id="textFieldUsuario" layoutX="226.0" layoutY="95.0" />
 

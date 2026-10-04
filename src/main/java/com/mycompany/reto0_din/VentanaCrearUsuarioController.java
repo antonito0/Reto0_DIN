@@ -87,6 +87,9 @@ public class VentanaCrearUsuarioController implements Initializable {
                 
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VentanaLogIn.fxml"));
                 Parent root = fxmlLoader.load();
+                
+                VentanaLogInController controlador = fxmlLoader.getController();
+                controlador.setDatos(fichero);
 
                 Stage stage = new Stage();
                 stage.setTitle("Iniciar Sesión");
