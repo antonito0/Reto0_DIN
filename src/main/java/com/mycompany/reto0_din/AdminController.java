@@ -6,13 +6,18 @@ import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 import modelo.*;
 
@@ -202,13 +207,25 @@ public class AdminController implements Initializable {
         salir.getScene().getWindow().hide();
     }
     
-    @FXML
-    private void abrirVistaEmpleado(ActionEvent event) {
-        try {
-            App.setRoot("VistaEmpleado");   // nombre del FXML SIN .fxml
-        } catch (Exception e) {
-            System.out.println("No se pudo abrir VistaEmpleado");
-        }
+   @FXML
+private void abrirVistaEmpleado(ActionEvent event) {
+    try {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VistaEmpleado.fxml"));
+        Parent root = fxmlLoader.load();
+
+        Stage stage = new Stage();
+        stage.setTitle("Vista Empleado");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        // Cerrar la ventana actual
+        Stage ventanaActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        ventanaActual.close();
+
+    } catch (Exception e) {
+        System.out.println("No se pudo abrir VistaEmpleado");
     }
+}
+
 
 }
