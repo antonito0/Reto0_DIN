@@ -53,10 +53,6 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        /*/Admin admin = modelo.verAdmin(fichero);
-        if (admin != null) {
-            rellenarLabels(admin);
-        }*/
         empleados.getItems().clear();
         empleados.getItems().add(null);
         for (Empleado e : modelo.leerEmpleados(fichero)) {
@@ -66,21 +62,33 @@ public class AdminController implements Initializable {
         empleados.setOnAction(event -> seleccionarEmpleado());
     }
     
-    public void setDatos(Persona persona, File fichero) {
-        this.persona = persona;
-        this.fichero = fichero;
-        usuario.setText(persona.getUsuario());
-        apellido.setText(persona.getApellido());
-        contra.setText(persona.getContrasena());
+   public void setDatos(Persona persona, File fichero) {
+    this.persona = persona;
+    this.fichero = fichero;
+
+    usuario.setText(persona.getUsuario());
+    apellido.setText(persona.getApellido());
+    contra.setText(persona.getContrasena());
+    nombreAdmin.setText(persona.getNombre());
+    
+    if (persona instanceof Admin) { //ya que la baja es un atributo de admin 
+        Admin admin = (Admin) persona;
+        baja.setSelected(admin.isBaja());
     }
 
-   /*private void rellenarLabels(Admin admin) {
-        usuario.setText(admin.getUsuario());
-        nombreAdmin.setText(admin.getNombre());
-        apellido.setText(admin.getApellido());
-        baja.setSelected(admin.isBaja());
-    }*/
-    
+    cargarEmpleados();
+    empleados.setOnAction(event -> seleccionarEmpleado());
+}
+
+    private void cargarEmpleados() {
+        empleados.getItems().clear();
+        empleados.getItems().add(null); // opción para crear nuevo empleado
+
+        for (Empleado e : modelo.leerEmpleados(fichero)) {
+            empleados.getItems().add(e);
+        }
+    }
+ 
     //mensaje para admin para informar 
     private void mostrarInfo(String msg) {
         alerta.setStyle("-fx-text-fill: green;");
@@ -92,21 +100,23 @@ public class AdminController implements Initializable {
         alerta.setText(msg);
     }
 
-    private void seleccionarEmpleado() {
-        Empleado emp = empleados.getValue();
-        if (emp == null) {
-            limpiarCamposEmpleado();
-            mostrarInfo("Introduce un nuevo empleado.");
-            return;
-        }
-        usuarioE.setText(emp.getUsuario());
-        contraE.setText(emp.getContrasena());
-        nombreE.setText(emp.getNombre());
-        apeE.setText(emp.getApellido());
-        ibanE.setText(emp.getIban());
-        mostrarInfo("Empleado cargado.");
+   private void seleccionarEmpleado() {
+    Empleado emp = empleados.getValue();
+
+    if (emp == null) {
+        limpiarCamposEmpleado();
+        mostrarInfo("Introduce un nuevo empleado.");
+        return;
     }
 
+    usuarioE.setText(emp.getUsuario());
+    contraE.setText(emp.getContrasena());
+    nombreE.setText(emp.getNombre());
+    apeE.setText(emp.getApellido());
+    ibanE.setText(emp.getIban());
+
+    mostrarInfo("Empleado cargado.");
+}
     private void limpiarCamposEmpleado() {
         usuarioE.clear();
         contraE.clear();
@@ -142,9 +152,11 @@ public class AdminController implements Initializable {
         modelo.actualizarEmpleado(fichero, seleccionado);
         mostrarInfo("Empleado actualizado correctamente.");
     }
+    
+    @FXML
     private void modificarAdmin(ActionEvent event) {
 
-        File fichO = new File("nombre.dat");
+        File fichO = new File("fichero.dat");
 
         Admin adminNuevo = new Admin(
                 usuario.getText(),     
@@ -153,17 +165,12 @@ public class AdminController implements Initializable {
                 apellido.getText()      
         );
 
-        // usuario no se puede cambiar
-        usuario.setEditable(false);
-
         // Actualizar el boolean del CheckBox
         adminNuevo.setBaja(baja.isSelected());
 
-        modelo.actualizarAdmin(fichO, adminNuevo);
+        modelo.actualizarAdmin(fichero, adminNuevo);
 
-        //rellenarLabels(adminNuevo);
-
-        System.out.println("Admin actualizado correctamente.");
+        mostrarInfo("Admin actualizado correctamente.");
     }
 
     @FXML
