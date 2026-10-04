@@ -31,7 +31,7 @@ public class VistaEmpleadoControlador {
     @FXML
     private Button visualizar;
 
-    /*@FXML
+    @FXML
     public void visualizarUsuarios(ActionEvent event) {
         listaUs.getItems().clear();
 
@@ -39,7 +39,7 @@ public class VistaEmpleadoControlador {
         for (Usuario u : imp.obtenerUsuarios()) {
             listaUs.getItems().add(u.getNombre());
         }
-    }*/
+    }
     
     public void setDatos(File fichero) {
         this.fichero = fichero;
