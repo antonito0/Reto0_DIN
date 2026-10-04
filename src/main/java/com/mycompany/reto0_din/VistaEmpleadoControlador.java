@@ -6,13 +6,16 @@ package com.mycompany.reto0_din;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import modelo.ImplementacionF;
+import javafx.stage.Stage;
+import modelo.ImplementacionFichero;
 import modelo.Usuario;
 
 /**
@@ -21,7 +24,7 @@ import modelo.Usuario;
  * @author rebeca
  */
 public class VistaEmpleadoControlador {
-    
+
     private File fichero;
 
     @FXML
@@ -31,18 +34,30 @@ public class VistaEmpleadoControlador {
     @FXML
     private Button visualizar;
 
-    @FXML
-    public void visualizarUsuarios(ActionEvent event) {
-        listaUs.getItems().clear();
-
-        ImplementacionF imp = new ImplementacionF();
-        for (Usuario u : imp.obtenerUsuarios()) {
-            listaUs.getItems().add(u.getNombre());
-        }
-    }
-    
     public void setDatos(File fichero) {
         this.fichero = fichero;
+    }
+
+    @FXML
+    public void visualizarUsuarios(ActionEvent event) {
+
+        listaUs.setVisible(true); // mostrar la lista
+
+        listaUs.getItems().clear();
+
+        ImplementacionFichero imp = new ImplementacionFichero();
+
+        for (Usuario u : imp.obtenerUsuarios(fichero)) {
+            listaUs.getItems().add(u.getNombre() + " " + u.getApellido() + " - Usuario: " + u.getUsuario());
+        }
+    }
+
+    @FXML
+    public void cerrarSesion(ActionEvent event) {
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+
     }
 
 }

@@ -7,31 +7,31 @@ import java.util.List;
 import utilidades.MyObjectOutputStream;
 
 public class ImplementacionFichero {
-    
+
     //rellena el fichero 
     public void fillData(File fichero) {
         if (!fichero.exists() || fichero.length() == 0) {
-          try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichero))) {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichero))) {
                 // ADMIN
-                 Admin admin1 = new Admin("admin1", "1234", "Mireia", "Lopez");
-                 // EMPLEADOS
-                 Empleado emp1 = new Empleado("ES9820385778983000760234", "emple1", "pass1", "Lucia", "Martinez");
-                 Empleado emp2 = new Empleado("ES7621000814561234567890", "emple2", "pass2", "Jon", "Garcia");
-                 // USUARIOS
-                 Usuario usu1 = new Usuario("12345678A", LocalDate.of(2000, 5, 12), "usu1", "1111", "Mikel", "Lopez");
-                 Usuario usu2 = new Usuario("98765432B", LocalDate.of(1998, 3, 20), "usu2", "2222", "Ane", "Santos");
+                Admin admin1 = new Admin("admin1", "1234", "Mireia", "Lopez");
+                // EMPLEADOS
+                Empleado emp1 = new Empleado("ES9820385778983000760234", "emple1", "pass1", "Lucia", "Martinez");
+                Empleado emp2 = new Empleado("ES7621000814561234567890", "emple2", "pass2", "Jon", "Garcia");
+                // USUARIOS
+                Usuario usu1 = new Usuario("12345678A", LocalDate.of(2000, 5, 12), "usu1", "1111", "Mikel", "Lopez");
+                Usuario usu2 = new Usuario("98765432B", LocalDate.of(1998, 3, 20), "usu2", "2222", "Ane", "Santos");
 
-                 // GUARDAR EN EL FICHERO
-                 oos.writeObject(admin1);
-                 oos.writeObject(emp1);
-                 oos.writeObject(emp2);
-                 oos.writeObject(usu1);
-                 oos.writeObject(usu2);
+                // GUARDAR EN EL FICHERO
+                oos.writeObject(admin1);
+                oos.writeObject(emp1);
+                oos.writeObject(emp2);
+                oos.writeObject(usu1);
+                oos.writeObject(usu2);
 
-                 System.out.println("Datos creados correctamente.");
+                System.out.println("Datos creados correctamente.");
             } catch (IOException e) {
                 System.out.println("Error escribiendo el fichero.");
-            }  
+            }
         }
     }
 
@@ -54,36 +54,36 @@ public class ImplementacionFichero {
         return null;
     }
 
-   public void actualizarAdmin(File fichO, Admin adminActualizado) {
-    List<Object> lista = new ArrayList<>();
-    boolean fin = false,encontrado=false;
-    
-    try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
-        while (!fin) {
-            try {
-                Object obj = ois.readObject();
-                lista.add(obj);
-            } catch (EOFException e) {
-                fin = true;
+    public void actualizarAdmin(File fichO, Admin adminActualizado) {
+        List<Object> lista = new ArrayList<>();
+        boolean fin = false, encontrado = false;
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
+            while (!fin) {
+                try {
+                    Object obj = ois.readObject();
+                    lista.add(obj);
+                } catch (EOFException e) {
+                    fin = true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error leyendo fichero para actualizar admin");
+        }
+        for (int i = 0; i < lista.size() && !encontrado; i++) {
+            if (lista.get(i) instanceof Admin) {
+                lista.set(i, adminActualizado);
+                encontrado = true;
             }
         }
-    } catch (Exception e) {
-        System.out.println("Error leyendo fichero para actualizar admin");
-    }
-    for (int i = 0; i < lista.size() && !encontrado; i++) {
-    if (lista.get(i) instanceof Admin) {
-        lista.set(i, adminActualizado);
-        encontrado = true; 
-    }
-}
-    try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
-        for (Object obj : lista) {
-            oos.writeObject(obj);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO))) {
+            for (Object obj : lista) {
+                oos.writeObject(obj);
+            }
+        } catch (Exception e) {
+            System.out.println("Error escribiendo fichero al actualizar admin");
         }
-    } catch (Exception e) {
-        System.out.println("Error escribiendo fichero al actualizar admin");
     }
-}
 
     public List<Empleado> leerEmpleados(File fichO) {
         List<Empleado> lista = new ArrayList<>();
@@ -140,6 +140,7 @@ public class ImplementacionFichero {
             System.out.println("Error escribiendo fichero al actualizar empleado");
         }
     }
+
     public void insertarEmpleado(File fichO, Empleado emp) {
         try (MyObjectOutputStream moos = new MyObjectOutputStream(new FileOutputStream(fichO, true))) {
             moos.writeObject(emp);
@@ -147,7 +148,7 @@ public class ImplementacionFichero {
             e.printStackTrace();
         }
     }
-    
+
     public Persona iniciarSesion(File fichO, String usuario, String contrasena) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
             boolean fin = false;
@@ -168,9 +169,9 @@ public class ImplementacionFichero {
         }
         return null;
     }
-    
+
     public Persona encontrarPersona(File fichO, String nomUsu) {
-        
+
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
             boolean fin = false;
             while (!fin) {
@@ -188,7 +189,7 @@ public class ImplementacionFichero {
         }
         return null;
     }
-    
+
     public void insertarUsuario(File fichO, Usuario usu) {
         try (MyObjectOutputStream moos = new MyObjectOutputStream(new FileOutputStream(fichO, true))) {
             moos.writeObject(usu);
@@ -196,4 +197,34 @@ public class ImplementacionFichero {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Usuario> obtenerUsuarios(File fichO) {
+
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
+
+            boolean fin = false;
+
+            while (!fin) {
+                try {
+
+                    Object obj = ois.readObject();
+
+                    if (obj instanceof Usuario) {
+                        usuarios.add((Usuario) obj);
+                    }
+
+                } catch (EOFException e) {
+                    fin = true;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return usuarios;
+    }
+
 }
