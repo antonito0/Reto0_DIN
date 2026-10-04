@@ -20,32 +20,26 @@
          <font><Font size="46.0" /></font>
       </Label>
 
-      <!-- BOTONES DE NAVEGACIÓN -->
       <Button fx:id="modificarE" layoutX="520.0" layoutY="294.0" mnemonicParsing="false" onAction="#modificarEmple" prefHeight="43.0" prefWidth="167.0" text="Modificar un empleado" />
 
       <Button fx:id="registrarE" layoutX="520.0" layoutY="375.0" mnemonicParsing="false" onAction="#registrarEmlpe" prefHeight="43.0" prefWidth="167.0" text="Registrar empleado" />
 
-      <!-- BOTÓN SALIR CORREGIDO -->
       <Button fx:id="salir" layoutX="699.0" layoutY="559.0" mnemonicParsing="false" onAction="#salir" prefHeight="34.0" prefWidth="119.0" text="Cerrar Sesión" />
 
-      <!-- CAMPOS DEL ADMIN -->
       <Label layoutX="40.0" layoutY="112.0" text="Usuario:" />
       <Label layoutX="292.0" layoutY="112.0" text="Contraseña:" />
       <Label layoutX="43.0" layoutY="160.0" text="Apellido:" />
 
-      <CheckBox fx:id="baja" layoutX="296.0" layoutY="162.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Baja" />
+      <CheckBox fx:id="baja" layoutX="303.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="103.0" text="Baja" />
 
       <TextField fx:id="usuario" layoutX="115.0" layoutY="108.0" />
       <TextField fx:id="contra" layoutX="396.0" layoutY="108.0" />
       <TextField fx:id="apellido" layoutX="115.0" layoutY="152.0" />
 
-      <!-- BOTÓN MODIFICAR ADMIN CORREGIDO -->
-      <Button fx:id="modificar" layoutX="650.0" layoutY="135.0" mnemonicParsing="false" onAction="#modificarEmple" prefHeight="34.0" prefWidth="155.0" text="Actualizar mis cambios" />
+      <Button fx:id="modificar" layoutX="650.0" layoutY="135.0" mnemonicParsing="false" onAction="#modificarAdmin" prefHeight="34.0" prefWidth="155.0" text="Actualizar mis cambios" />
 
-      <!-- COMBOBOX EMPLEADOS -->
       <ComboBox fx:id="empleados" layoutX="32.0" layoutY="218.0" prefHeight="27.0" prefWidth="767.0" />
 
-      <!-- CAMPOS DEL EMPLEADO -->
       <Label layoutX="54.0" layoutY="270.0" text="Usuario:" />
       <Label layoutX="53.0" layoutY="319.0" text="Contraseña:" />
       <Label layoutX="52.0" layoutY="370.0" text="Nombre:" />
@@ -58,7 +52,6 @@
       <TextField fx:id="apeE" layoutX="176.0" layoutY="419.0" />
       <TextField fx:id="ibanE" layoutX="177.0" layoutY="479.0" />
 
-      <!-- LABEL ALERTA -->
       <Label fx:id="alerta" layoutX="364.0" layoutY="477.0" prefHeight="30.0" prefWidth="426.0">
          <font>
             <Font size="20.0" />

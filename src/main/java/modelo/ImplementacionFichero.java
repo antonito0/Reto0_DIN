@@ -14,7 +14,6 @@ public class ImplementacionFichero {
           try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichero))) {
                 // ADMIN
                  Admin admin1 = new Admin("admin1", "1234", "Mireia", "Lopez");
-                 Admin admin2 = new Admin("admin2", "abcd", "Carlos", "Perez");
                  // EMPLEADOS
                  Empleado emp1 = new Empleado("ES9820385778983000760234", "emple1", "pass1", "Lucia", "Martinez");
                  Empleado emp2 = new Empleado("ES7621000814561234567890", "emple2", "pass2", "Jon", "Garcia");
@@ -24,7 +23,6 @@ public class ImplementacionFichero {
 
                  // GUARDAR EN EL FICHERO
                  oos.writeObject(admin1);
-                 oos.writeObject(admin2);
                  oos.writeObject(emp1);
                  oos.writeObject(emp2);
                  oos.writeObject(usu1);
