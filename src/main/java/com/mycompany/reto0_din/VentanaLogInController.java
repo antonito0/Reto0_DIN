@@ -4,8 +4,6 @@ package com.mycompany.reto0_din;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
-
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -34,9 +32,9 @@ import modelo.Usuario;
  * @author Unai.Ibarguren
  */
 public class VentanaLogInController implements Initializable {
-    
+
     private ImplementacionFichero modelo = new ImplementacionFichero();
-    
+
     private final File fichero = new File("fichero.dat");
 
     @FXML
@@ -57,17 +55,32 @@ public class VentanaLogInController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         modelo.fillData(fichero);
     }
-    
+
     @FXML
-    public void iniciarSesion (ActionEvent event) throws IOException {
-        Persona persona = modelo.iniciarSesion(fichero, textFieldUsuario.getText(), passwordFieldContrasena.getText());
-        
-       if (persona instanceof Usuario) {
-           
-       } else if (persona instanceof Empleado) {
-           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VistaEmpleado.fxml"));
+    public void iniciarSesion(ActionEvent event) throws IOException {
+        Persona persona = modelo.obtenerPersona(fichero, textFieldUsuario.getText(), passwordFieldContrasena.getText());
+
+        if (persona instanceof Usuario) {
+
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Usuario.fxml"));
             Parent root = fxmlLoader.load();
+
+            UsuarioController controlador = fxmlLoader.getController();
+            controlador.setDatos((Usuario) persona);
+
             
+            Stage stage = new Stage();
+            stage.setTitle("Usuario");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            Stage ventanaActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            ventanaActual.close();
+
+        } else if (persona instanceof Empleado) {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VistaEmpleado.fxml"));
+            Parent root = fxmlLoader.load();
+
             VistaEmpleadoControlador controlador = fxmlLoader.getController();
             controlador.setDatos(fichero);
 
@@ -78,10 +91,10 @@ public class VentanaLogInController implements Initializable {
 
             Stage ventanaActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
             ventanaActual.close();
-       } else if (persona instanceof Admin) {
-           FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Admin .fxml"));
+        } else if (persona instanceof Admin) {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Admin .fxml"));
             Parent root = fxmlLoader.load();
-            
+
             AdminController controlador = fxmlLoader.getController();
             controlador.setDatos(persona, fichero);
 
@@ -92,11 +105,11 @@ public class VentanaLogInController implements Initializable {
 
             Stage ventanaActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
             ventanaActual.close();
-       } else {
-           lblError.setText("Usuario o contraseña incorrectos");
-       }
+        } else {
+            lblError.setText("Usuario o contraseña incorrectos");
+        }
     }
-    
+
     @FXML
     private void crearUsuario(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VentanaCrearUsuario.fxml"));
@@ -113,5 +126,5 @@ public class VentanaLogInController implements Initializable {
         Stage ventanaActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ventanaActual.close();
     }
-    
+
 }
