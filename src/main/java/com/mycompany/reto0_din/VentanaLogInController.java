@@ -58,7 +58,7 @@ public class VentanaLogInController implements Initializable {
 
     @FXML
     public void iniciarSesion(ActionEvent event) throws IOException {
-        Persona persona = modelo.obtenerPersona(fichero, textFieldUsuario.getText(), passwordFieldContrasena.getText());
+        Persona persona = modelo.iniciarSesion(fichero, textFieldUsuario.getText(), passwordFieldContrasena.getText());
 
         if (persona instanceof Usuario) {
 
