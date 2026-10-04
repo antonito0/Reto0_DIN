@@ -207,25 +207,31 @@ public class AdminController implements Initializable {
         salir.getScene().getWindow().hide();
     }
     
-   @FXML
+  @FXML
 private void abrirVistaEmpleado(ActionEvent event) {
     try {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VistaEmpleado.fxml"));
         Parent root = fxmlLoader.load();
+
+        // PASAR EL FICHERO AL CONTROLADOR
+        VistaEmpleadoControlador controlador = fxmlLoader.getController();
+        controlador.setDatos(fichero);
 
         Stage stage = new Stage();
         stage.setTitle("Vista Empleado");
         stage.setScene(new Scene(root));
         stage.show();
 
-        // Cerrar la ventana actual
+        // Cerrar ventana actual
         Stage ventanaActual = (Stage) ((Node) event.getSource()).getScene().getWindow();
         ventanaActual.close();
 
     } catch (Exception e) {
+        e.printStackTrace();
         System.out.println("No se pudo abrir VistaEmpleado");
     }
 }
+
 
 
 }
