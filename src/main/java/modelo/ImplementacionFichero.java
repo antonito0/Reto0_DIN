@@ -149,7 +149,7 @@ public class ImplementacionFichero {
         }
     }
     
-    public Persona obtenerPersona(File fichO, String usuario, String contrasena) {
+    public Persona iniciarSesion(File fichO, String usuario, String contrasena) {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
             boolean fin = false;
             while (!fin) {
@@ -168,5 +168,33 @@ public class ImplementacionFichero {
             System.out.println("Error leyendo admin");
         }
         return null;
+    }
+    
+    public Persona encontrarPersona(File fichO, String nomUsu) {
+        
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichO))) {
+            boolean fin = false;
+            while (!fin) {
+                try {
+                    Persona persona = (Persona) ois.readObject();
+                    if (persona.getUsuario().equals(nomUsu)) {
+                        return persona;
+                    }
+                } catch (EOFException e) {
+                    fin = true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error leyendo admin");
+        }
+        return null;
+    }
+    
+    public void insertarUsuario(File fichO, Usuario usu) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichO, true))) {
+            oos.writeObject(usu);
+        } catch (Exception e) {
+            System.out.println("Error insertando empleado");
+        }
     }
 }

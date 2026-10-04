@@ -114,6 +114,9 @@ public class VentanaLogInController implements Initializable {
     private void crearUsuario(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("VentanaCrearUsuario.fxml"));
         Parent root = fxmlLoader.load();
+        
+        VentanaCrearUsuarioController controlador = fxmlLoader.getController();
+        controlador.setDatos(fichero);
 
         Stage stage = new Stage();
         stage.setTitle("Crear usuario");
